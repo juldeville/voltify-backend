@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
 
 const outletsSchema = mongoose.Schema({
-    user: {type: mongoose.Schema.Types.ObjectId, ref: 'users'},
-    booking: {type: mongoose.Schema.Types.ObjectId, ref: 'bookings'},
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
+    booking: { type: mongoose.Schema.Types.ObjectId, ref: 'bookings' },
     longitude: Number,
-    lattitude: Number,
+    latitude: Number,
     type: String,
     price: Number,
     availability: Boolean,
