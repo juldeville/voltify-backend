@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const Outlet = require('../models/outlets');
+const Outlet = require('../models/outlet');
 
 //add new outlet
 
@@ -54,3 +54,5 @@ router.delete('/deleteOutlet', (req, res) => {
         }
     })
 })
+
+module.exports = router;

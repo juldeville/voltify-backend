@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const Booking = require('../models/bookings');
+const Booking = require('../models/booking');
 
 
 
@@ -32,6 +32,8 @@ router.post('/addBooking/', (req, res) => {
         duration: req.body.duration,
     })
 })
+
+module.exports = router;
 
 
 
