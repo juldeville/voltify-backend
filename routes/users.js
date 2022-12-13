@@ -64,7 +64,7 @@ router.post('/signin', (req, res) => {
 
 // Get user profile info
 
-router.get('/canBookmark/:token', (req, res) => {
+router.get('/viewUser/:token', (req, res) => {
   User.findOne({ token: req.params.token }).then(data => {
     if (data) {
       res.json({ result: true, profile: data});

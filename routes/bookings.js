@@ -38,17 +38,3 @@ router.post('/addBooking/', (req, res) => {
 
 
 
-
-
-
-
-
-
-router.post('/newBooking', (req, res) => {
-    if (!checkBody(req.body, ['date',])) {
-        res.json({result: false, error: 'Missing or empty fields'})
-        return
-      } 
-
-})
-
