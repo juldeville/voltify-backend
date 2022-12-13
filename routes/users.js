@@ -14,8 +14,10 @@ router.post('/signup', (req, res) => {
     return
   } 
 
+
   // Check if the user has not already been registered
   User.findOne({ email: req.body.email }).then(data => {
+    
     if (data === null) {
       const hash = bcrypt.hashSync(req.body.password, 10);
 
@@ -66,6 +68,7 @@ router.post('/signin', (req, res) => {
 
 router.get('/viewUser/:token', (req, res) => {
   User.findOne({ token: req.params.token }).then(data => {
+    console.log(data)
     if (data) {
       res.json({ result: true, profile: data});
     } else {
@@ -77,7 +80,8 @@ router.get('/viewUser/:token', (req, res) => {
 // Delete user profile
 router.delete('/deleteUser', (req, res) => {
   User.deleteOne({token: req.body.token}).then(data => {
-      if (data.deleteCount > 0) {
+    console.log(data)
+      if (data.deletedCount > 0) {
           res.json({result: true})
       } else {
           res.json({result: false, error: 'User not found'})
