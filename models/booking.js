@@ -8,7 +8,6 @@ const bookingsSchema = mongoose.Schema({
     finalPrice: Number,
     duration: Date,
     votes: Number,
-
 })
 
 const Booking = mongoose.model('bookings', bookingsSchema);

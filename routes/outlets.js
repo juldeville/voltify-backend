@@ -1,17 +1,19 @@
 var express = require('express');
 var router = express.Router();
 const Outlet = require('../models/outlet');
-
+const { checkBody } = require('../modules/checkBody');
+const User = require('../models/user')
 //add new outlet
 
 router.post('/addOutlet', (req, res) => {
-    if (!checkBody(req.body, ['longtitude', 'latitude', 'type', 'price', 'availability'])) {
+    if (!checkBody(req.body, ['longitude', 'latitude', 'type', 'price', 'availability'])) {
         res.json({ result: false, error: 'Missing or empty fields' });
         return;
     }
 
     User.findOne({ token: req.body.token }).then(data => {
-        if (data === null) {
+        console.log(data)
+        if (data) {
             const newOutlet = new Outlet({
                 user: data._id,
                 longitude: req.body.longitude,
@@ -22,6 +24,7 @@ router.post('/addOutlet', (req, res) => {
             })
 
             newOutlet.save().then(newDoc => {
+                console.log(newDoc)
                 res.json({ result: true })
             })
         } else {
@@ -45,13 +48,16 @@ router.get('/displayOutlet', (req, res) => {
 
 //delete outlet
 
+
 router.delete('/deleteOutlet', (req, res) => {
-    Outlet.deleteOne({ token: req.body.token }).then(data => {
-        if (data.deleteCount > 0) {
-            res.json({ result: true })
-        } else {
-            res.json({ result: false, error: 'Outlet not found' })
-        }
+    User.findOne({token: req.body.token}).then(data => {
+        Outlet.deleteOne({user: data._id}).then(data => {
+            if (data.deletedCount > 0) {
+                res.json({ result: true })
+            } else {
+                res.json ({result: false, error: 'Outlet not found'})
+            }
+        })
     })
 })
 

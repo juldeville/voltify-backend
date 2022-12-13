@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 
 // Sign up new user
 router.post('/signup', (req, res) => {
-  if (!checkBody(req.body, ['fistName', 'lastName', 'email', 'password',])) {
+  if (!checkBody(req.body, ['firstName', 'lastName', 'email', 'password',])) {
     res.json({result: false, error: 'Missing or empty fields'})
     return
   } 
@@ -86,3 +86,5 @@ router.delete('/deleteUser', (req, res) => {
 })
 
 module.exports = router;
+
+
