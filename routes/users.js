@@ -89,6 +89,40 @@ router.delete('/deleteUser', (req, res) => {
   })
 })
 
+// update user profile
+
+router.put('/updateUser', (req, res) => {
+    const updatedUser = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      iban: req.body.iban
+  }
+  User.updateOne({token: req.body.token}, updatedUser).then(() => {
+    res.status(201).json({
+      message: 'updatedUser successfull'
+    })
+  })
+})
+
+
+// update password
+router.put('/updatePassword', (req, res) => {
+  User.findOne({ token: req.body.token }).then(data => {
+    if (data && bcrypt.compareSync(req.body.password, data.password)) {
+      const hash = bcrypt.hashSync(req.body.updatedPassword, 10);
+      const updatePassword = {
+        password: hash
+      }
+      User.updateOne({token: req.body.token}, updatePassword).then(() => {
+        res.json({ result: true,});
+      })   
+    } else {
+      res.json({ result: false, error: 'wrong password' });
+    }
+  });
+});
+
 module.exports = router;
 
 
