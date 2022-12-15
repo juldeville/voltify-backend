@@ -16,6 +16,7 @@ router.post('/addOutlet', (req, res) => {
         if (data) {
             const newOutlet = new Outlet({
                 user: data._id,
+                address: req.body.address,
                 longitude: req.body.longitude,
                 latitude: req.body.latitude,
                 type: req.body.type,
@@ -50,12 +51,12 @@ router.get('/displayOutlet', (req, res) => {
 
 
 router.delete('/deleteOutlet', (req, res) => {
-    User.findOne({token: req.body.token}).then(data => {
-        Outlet.deleteOne({user: data._id}).then(data => {
+    User.findOne({ token: req.body.token }).then(data => {
+        Outlet.deleteOne({ user: data._id }).then(data => {
             if (data.deletedCount > 0) {
                 res.json({ result: true })
             } else {
-                res.json ({result: false, error: 'Outlet not found'})
+                res.json({ result: false, error: 'Outlet not found' })
             }
         })
     })
