@@ -28,7 +28,7 @@ router.post('/signup', (req, res) => {
         password: hash,
         photo: req.body.photo,
         iban: req.body.iban,
-        address: String,
+        address: req.body.address,
         token: uid2(32),
       });
 
