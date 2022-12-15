@@ -28,12 +28,7 @@ router.post('/signup', (req, res) => {
         password: hash,
         photo: req.body.photo,
         iban: req.body.iban,
-        address: {
-          number: req.body.number,
-          street: req.body.street,
-          zipcode: req.body.zipcode,
-          city: req.body.city
-        },
+        address: String,
         token: uid2(32),
       });
 
@@ -93,10 +88,9 @@ router.delete('/deleteUser', (req, res) => {
 
 router.put('/updateUser', (req, res) => {
     const updatedUser = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
       email: req.body.email,
-      iban: req.body.iban
+      iban: req.body.iban,
+      address: req.body.address
   }
   User.updateOne({token: req.body.token}, updatedUser).then(() => {
     res.status(201).json({

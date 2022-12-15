@@ -1,12 +1,5 @@
 const mongoose = require('mongoose')
 
-const addressesSchema = mongoose.Schema({
-    number: Number,
-    street: String,
-    zipcode: String,
-    city: String,
-    
-})
 
 const usersSchema = mongoose.Schema({
     token: String,
@@ -16,7 +9,7 @@ const usersSchema = mongoose.Schema({
     password: String,
     photo: String,
     iban: String,
-    address: addressesSchema
+    address: String,
 })
 
 const User = mongoose.model('users', usersSchema)
