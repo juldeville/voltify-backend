@@ -94,6 +94,7 @@ router.put('/updateUser', (req, res) => {
   }
   User.updateOne({token: req.body.token}, updatedUser).then(() => {
     res.status(201).json({
+      result: true,
       message: 'updatedUser successfull'
     })
   })
