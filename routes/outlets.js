@@ -64,6 +64,23 @@ router.get('/displayOutlet', (req, res) => {
     })
 })
 
+//get userOutlet
+
+router.get('/displayUserOutlet/:token', (req, res) => {
+    User.findOne({token: req.params.token}).then(data => {
+        console.log('findOne params token', data)
+        console.log('juste dataID', data._id)
+        Outlet.findOne({user: data._id}).then(data => {
+            console.log('should be outlet Data', data)
+            if (data) {
+                res.json({result: true, outlet: data})
+            } else {
+                res.json({result: false, error: 'error detected'})
+            }
+        })
+    })
+})
+
 //delete outlet
 
 
