@@ -35,6 +35,23 @@ router.post('/addOutlet', (req, res) => {
 
 })
 
+//add new vote
+router.put('/addVote', (req, res) => {
+    console.log(req.body)
+    Outlet.updateOne({_id: req.body.id}, { $push: {votes: req.body.vote }}).then(data => {
+        console.log(data)
+        if (data.modifiedCount > 0) {
+            console.log('successful vote')
+            res.json({result: true})
+        } else {
+            console.log('failed to vote')
+            res.json({result: false})
+        }
+    })
+})
+
+
+
 //display all outlet data
 
 router.get('/displayOutlet', (req, res) => {

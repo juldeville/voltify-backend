@@ -9,6 +9,7 @@ const outletsSchema = mongoose.Schema({
     type: String,
     price: Number,
     availability: Boolean,
+    votes: [Number],
 })
 
 const Outlet = mongoose.model('outlets', outletsSchema)
