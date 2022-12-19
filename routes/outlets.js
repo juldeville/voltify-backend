@@ -6,7 +6,7 @@ const User = require('../models/user')
 //add new outlet
 
 router.post('/addOutlet', (req, res) => {
-    if (!checkBody(req.body, ['longitude', 'latitude', 'type', 'price', 'availability'])) {
+    if (!checkBody(req.body, ['longitude', 'latitude', 'type', 'price', ])) {
         res.json({ result: false, error: 'Missing or empty fields' });
         return;
     }
@@ -21,7 +21,7 @@ router.post('/addOutlet', (req, res) => {
                 latitude: req.body.latitude,
                 type: req.body.type,
                 price: req.body.price,
-                availability: req.body.availability,
+                
             })
 
             newOutlet.save().then(newDoc => {
