@@ -10,7 +10,7 @@ router.post('/addTransaction', (req, res) => {
 
     User.findOne({ token: req.body.token }).then(data => {
         console.log(data)
-        if (data.result) {
+        if (data) {
             const newTransaction = new Transaction({
                 user: data._id,
                 outlet: req.body.id,
@@ -21,7 +21,7 @@ router.post('/addTransaction', (req, res) => {
 
             newTransaction.save().then(newDoc => {
                 console.log(newDoc)
-                res.json({ result: true, transactionData: data})
+                res.json({ result: true, transactionData: data })
             })
         } else {
             res.json({ result: false, error: 'No user found' });
