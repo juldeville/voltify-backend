@@ -5,7 +5,7 @@ const User = require('../models/user')
 
 
 
-
+//POST Transaction
 router.post('/addTransaction', (req, res) => {
 
     User.findOne({ token: req.body.token }).then(data => {
@@ -28,6 +28,23 @@ router.post('/addTransaction', (req, res) => {
         }
     })
 
+})
+
+
+//GET Transaction
+router.get('/addTransaction/:token', (req, res) => {
+    User.findOne({ token: req.params.token }).then(data => {
+        console.log('findOne params token', data)
+        console.log('USER ID IS...', data._id)
+        Transaction.findOne({ user: data._id }).then(data => {
+            console.log('should be Transaction Data', data)
+            if (data) {
+                res.json({ result: true, outlet: data })
+            } else {
+                res.json({ result: false, error: 'error detected' })
+            }
+        })
+    })
 })
 
 
