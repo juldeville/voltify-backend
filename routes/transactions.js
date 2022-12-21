@@ -36,7 +36,7 @@ router.get('/addTransaction/:token', (req, res) => {
     User.findOne({ token: req.params.token }).then(data => {
         console.log('findOne params token', data)
         console.log('USER ID IS...', data._id)
-        Transaction.findOne({ user: data._id }).then(data => {
+        Transaction.find({ user: data._id }).then(data => {
             console.log('should be Transaction Data', data)
             if (data) {
                 res.json({ result: true, outlet: data })
