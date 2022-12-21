@@ -21,7 +21,7 @@ router.post('/addTransaction', (req, res) => {
 
             newTransaction.save().then(newDoc => {
                 console.log(newDoc)
-                res.json({ result: true, transactionData: data })
+                res.json({ result: true, transactionData: newDoc })
             })
         } else {
             res.json({ result: false, error: 'No user found' });
