@@ -33,7 +33,7 @@ router.post('/addTransaction', (req, res) => {
 
 //GET Transaction
 router.get('/addTransaction/:token', (req, res) => {
-    User.find({ token: req.params.token }).then(data => {
+    User.findOne({ token: req.params.token }).then(data => {
         console.log('findOne params token', data)
         console.log('USER ID IS...', data._id)
         Transaction.find({ user: data._id }).then(data => {
